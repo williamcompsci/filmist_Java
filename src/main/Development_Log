@@ -1,0 +1,24 @@
+This is a development log for the project. It is used to track changes, features, and issues during the development process.
+
+7.15.2025
+    - Implemented user registration and login functionality.
+    - Added basic user management with an ArrayList to store users.
+    - Created a simple UI with JavaFX for user interaction.
+
+    Next:
+        - Backdoor admin account
+        - Further UI enhancements
+        - JSON or txt file storage for user data
+            - File storage structure to be decided
+        - Main application popup window
+
+7.16.2025
+    - Added main UI.
+    - User authentication successfully implemented.
+    - Login window closes on successful login.
+    - Main window opens after login. Added list of films.
+
+    Next:
+        - UI completion
+        - Adding list edit functionality
+        - Application settings menu
