@@ -127,7 +127,7 @@ public class loginController {
 
     private void openMainMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/filmlistia/mainMenu.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Filmist");

@@ -19,4 +19,13 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    // Username setter
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    // Password setter
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
