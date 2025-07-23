@@ -10,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
@@ -41,12 +45,15 @@ public class loginController {
     private Text txt_welcomeTitle;
 
     private ArrayList<User> users = new ArrayList<>();
+    // Default admin account
+
+    int numberOfUsers = 0;
 
     @FXML
     void initialize() {
         loadUsers();
-        // Default admin account
-        users.add(new User("admin", "admin123"));
+
+
 
         input_username.requestFocus();
         //Sets focus to prompt entering username
@@ -86,12 +93,22 @@ public class loginController {
             loginStatus("Registration Failed", "Username already exists! Please choose a different username.");
             return; // Exit the method if username already exists
         } else {
-            users.add(new User(username, password));
+            users.add(new User(username, password, numberOfUsers+1));
             loginStatus("Registration Successful", "User registered successfully! You can now log in.");
             input_username.clear();
             input_password.clear();
             input_username.requestFocus();// Reset focus to the username field
             saveUsers(); // Save the updated user list to the file
+
+/*
+            Path userDir = Paths.get(username);
+
+            try {
+                Files.createDirectories(userDir);
+            } catch (IOException e) {
+                System.out.println("Unable to create user directory");
+            }
+*/
             return; // Exit the method after successful registration
         }
     }
@@ -99,8 +116,10 @@ public class loginController {
     @FXML
     private void saveUsers() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt"))) {
-            for (int i =0; i<users.size(); i++) {
-                writer.write(users.get(i).getUsername() + "," + users.get(i).getPassword());
+            writer.write(String.valueOf(numberOfUsers));
+            writer.newLine(); // Write the number of users as the first line for user identificaiton
+            for (int i =1; i<users.size(); i++) {
+                writer.write(users.get(i).getUsername() + "," + users.get(i).getPassword() + "," + i);
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -111,11 +130,21 @@ public class loginController {
     @FXML
     private void loadUsers() {
         try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+            String header = reader.readLine();
+            if (header == null) {
+                System.out.println("Invalid header, defaulting to 0 users.");
+                numberOfUsers = 0; // Default to 0 users if the file is empty or invalid
+                return; // Exit the method if the file is empty
+            } else {
+                numberOfUsers = Integer.parseInt(header); // Insert first line as number of users
+            }
+
+
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 2) {
-                    users.add(new User(parts[0], parts[1]));
+                if (parts.length == 3) {
+                    users.add(new User(parts[0], parts[1], Integer.parseInt(parts[2])));
                 }
             }
         } catch (IOException e) {
@@ -157,6 +186,9 @@ public class loginController {
         alert.setContentText(details);
         alert.showAndWait();
         // Displays an alert dialog with the given message and details
+    }
+
+    private void createUserFile() {
     }
 
 }

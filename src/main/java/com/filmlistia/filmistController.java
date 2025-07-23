@@ -129,8 +129,19 @@ public class filmistController {
     }
 
 
+    private void initialize() {
+        // initialize by loading the information in the txt file and displaying it in the table
 
+    }
 
+    private void loadData() {
+
+    }
+
+    private void updateTable() {
+        // Logic to update the table with the data
+
+    }
 
     private void openAddFilmDialog() {
         // Logic to open the Add Film dialog
@@ -147,7 +158,10 @@ public class filmistController {
     }
 
 
+    private void writeDataToFile() {
+        // Logic to write the data to a file
 
 
+    }
 }
 

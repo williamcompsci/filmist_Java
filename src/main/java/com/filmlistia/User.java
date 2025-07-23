@@ -3,11 +3,13 @@ package com.filmlistia;
 public class User {
     private String username;
     private String password;
+    private int userID;
 
     // Constructor method
-    public User(String username, String password) {
+    public User(String username, String password, int userID) {
         this.username = username;
         this.password = password;
+        this.userID = userID;
     }
 
     // Username return
@@ -19,6 +21,12 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    // User ID return
+    public int getUserID() {
+        return userID;
+    }
+
 
     // Username setter
     public void setUsername(String username) {
