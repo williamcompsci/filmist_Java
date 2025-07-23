@@ -65,6 +65,9 @@ public class filmistController {
     private MenuItem menu_saveListAs;
 
     @FXML
+    private MenuItem menu_logout;
+
+    @FXML
     private TableColumn<?, ?> table_filmDirector;
 
     @FXML
@@ -91,7 +94,27 @@ public class filmistController {
     }
 
     @FXML
+    void btn_startsearch(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deleteFilm(ActionEvent event) {
+
+    }
+
+    @FXML
     void editFilm(ActionEvent event) {
+
+    }
+
+    @FXML
+    void inspectPreferences(ActionEvent event) {
+
+    }
+
+    @FXML
+    void logout(ActionEvent event) {
 
     }
 
@@ -99,6 +122,14 @@ public class filmistController {
     void markwatched(ActionEvent event) {
 
     }
+
+    @FXML
+    void unkmarkwatched(ActionEvent event) {
+
+    }
+
+
+
 
 
     private void openAddFilmDialog() {

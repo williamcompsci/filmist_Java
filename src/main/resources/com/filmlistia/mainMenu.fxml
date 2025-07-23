@@ -75,7 +75,7 @@
             <MenuItem fx:id="menu_delete" mnemonicParsing="false" onAction="#deleteFilm" text="Delete" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="btn_menupreferences" mnemonicParsing="false" onAction="#inspectPreferences" text="Preferences" />
-                  <MenuItem fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <MenuItem fx:id="menu_logout" mnemonicParsing="false" onAction="#logout" text="Logout" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
