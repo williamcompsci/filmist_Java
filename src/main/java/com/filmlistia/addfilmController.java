@@ -49,9 +49,9 @@ public class addfilmController {
     @FXML
     private Text txt_Title;
 
-    private ArrayList<Film> filmlist = new ArrayList<>();
 
-   // Path filePath = Paths.get();
+
+   //Path filePath = Paths.get(username);
 
     @FXML
     void cancelNewFilm(ActionEvent event) {
@@ -75,29 +75,30 @@ public class addfilmController {
         }
 
         // Here you would typically save the film details to a database or file
-        writeFilmToFile();
+        //writeFilmToFile();
 
         // Close the window after saving
         btn_confirmFilmNew.getScene().getWindow().hide();
     }
-
+/*
     private void writeFilmToFile() {
         // Method to write film details to a file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("filmlist.txt", true))) {
-            String filmDetails = String.format("%s,%s,%s,%d,%d\n",
-                    input_titleFilmNew.getText(),
-                    input_genreFilmNew.getText(),
-                    input_directorFilmNew.getText(),
-                    input_yearFilmNew.getValue(),
-                    input_durationFilmNew.getValue());
-            writer.write(filmDetails);
+        // use the same as login reg
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("filmlist.txt", true))) { // Remember to add directory
+            //writer.write(String.valueOf());
+            writer.newLine();
+            for int i=1; i < numberOfFilms; i++) {
+                writer.write(input_titleFilmNew.getText() + "," + input_genreFilmNew.getText() + "," + input_directorFilmNew.getText() + "," + input_yearFilmNew.getValue() + "," + input_durationFilmNew.getValue() + "," + "false");
+                writer.newLine();
+            }
+
+            // The last "false" indicates that the film has not been watched yet. This is by default.
             alert("Success", "Film added successfully!");
         } catch (IOException e) {
             alert("Error", "Failed to save film details: " + e.getMessage());
         }
-
     }
-
+*/
     private void loadFilmList() {
         // Method to load the film list from a file
     }

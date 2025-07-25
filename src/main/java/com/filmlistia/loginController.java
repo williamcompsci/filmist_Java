@@ -52,13 +52,10 @@ public class loginController {
     @FXML
     void initialize() {
         loadUsers();
-
-
-
         input_username.requestFocus();
         //Sets focus to prompt entering username
     }
-
+    public static String loggedInUser; // Keep track of the logged-in user for later usage mostly in directory and file management ssytems
     @FXML
     void handleLogin(ActionEvent event) {
         String username = input_username.getText();
@@ -73,6 +70,7 @@ public class loginController {
 
             openMainMenu(); // Opens the main menu after successful login
             Stage loginStage = (Stage) btn_login.getScene().getWindow();
+            loggedInUser = user.getUsername();
             loginStage.close();
         } else {
             loginStatus("Login Failed", "Invalid username or password! Please try again.");
@@ -100,15 +98,17 @@ public class loginController {
             input_username.requestFocus();// Reset focus to the username field
             saveUsers(); // Save the updated user list to the file
 
-/*
+
+            // Create a directory for the user that is being registered.
             Path userDir = Paths.get(username);
 
             try {
                 Files.createDirectories(userDir);
+                System.out.println("User directory created: " + userDir.toAbsolutePath());
             } catch (IOException e) {
                 System.out.println("Unable to create user directory");
             }
-*/
+            numberOfUsers++; // Add user count
             return; // Exit the method after successful registration
         }
     }
@@ -118,8 +118,8 @@ public class loginController {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt"))) {
             writer.write(String.valueOf(numberOfUsers));
             writer.newLine(); // Write the number of users as the first line for user identificaiton
-            for (int i =1; i<users.size(); i++) {
-                writer.write(users.get(i).getUsername() + "," + users.get(i).getPassword() + "," + i);
+            for (int i =0; i<users.size(); i++) {
+                writer.write(users.get(i).getUsername() + "," + users.get(i).getPassword() + "," + (i+1)); // Write each user's details in the format: username,password,userID
                 writer.newLine();
             }
         } catch (IOException e) {

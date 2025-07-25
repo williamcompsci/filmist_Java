@@ -22,3 +22,10 @@ This is a development log for the project. It is used to track changes, features
         - UI completion
         - Adding list edit functionality
         - Application settings menu
+
+7.25.2025
+    - Completed main UI layout.
+    - Resolved user authentication and file system issues.
+
+    Next:
+        - Note to self: Can use same controller and UI for add and edit film by creating an empty film object and passing it to the controller for edit mode. This then uses the same logic for add.

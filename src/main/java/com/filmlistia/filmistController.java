@@ -12,7 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import static com.filmlistia.loginController.loggedInUser;
 
 public class filmistController {
 
@@ -88,6 +95,8 @@ public class filmistController {
     @FXML
     private Text txt_welcome;
 
+    public static int filmCount = 0; // Keeping track of the number of films for the current user. Default 0 until file read.
+
     @FXML
     void addFilm(ActionEvent event) {
         openAddFilmDialog();
@@ -105,7 +114,8 @@ public class filmistController {
 
     @FXML
     void editFilm(ActionEvent event) {
-
+// Use same UI for editing as for adding a film
+        openEditFilmDialog();
     }
 
     @FXML
@@ -128,9 +138,40 @@ public class filmistController {
 
     }
 
+    private int numberOfFilms; // Keeping track of the number of films for the current user. Default 0 until file read.
 
+
+    private ArrayList<Film> filmlist = new ArrayList<>();
+
+
+    @FXML
     private void initialize() {
         // initialize by loading the information in the txt file and displaying it in the table
+        // grab info from txt file from filmlist.txt in user directory
+        Path userDirectory = Paths.get(loginController.loggedInUser);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(userDirectory+ "/filmlist.txt"))) {
+            String header = reader.readLine();
+            if (header == null) {
+                System.out.println("Invalid header, defaulting to 0 users.");
+                numberOfFilms = 0; // Default to 0 users if the file is empty or invalid
+                return; // Exit the method if the file is empty
+            } else {
+                numberOfFilms = Integer.parseInt(header); // Insert first line as number of users
+            }
+
+// Reading the film data from the file, just like for the users.
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    filmlist.add(new Film(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Boolean.parseBoolean(parts[5])));
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading user films: " + e.getMessage());
+        }
+
 
     }
 
@@ -150,6 +191,21 @@ public class filmistController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Add Film");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error opening main menu: " + e.getMessage());
+        }
+    }
+
+    private void openEditFilmDialog() {
+        // Logic to open the edit film dialog
+        // Grab currently selected film from the table
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/filmlistia/editFilmMenu.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Edit Film");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
