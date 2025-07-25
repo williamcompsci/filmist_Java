@@ -40,7 +40,7 @@ public class Film {
     public int getFilmLength() {
         return filmLength;
     }
-    public boolean isWatched() {
+    public boolean getWatchStatus() {
         return watched;
     }
 

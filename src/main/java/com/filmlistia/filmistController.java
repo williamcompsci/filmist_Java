@@ -12,9 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -154,10 +152,10 @@ public class filmistController {
             String header = reader.readLine();
             if (header == null) {
                 System.out.println("Invalid header, defaulting to 0 users.");
-                numberOfFilms = 0; // Default to 0 users if the file is empty or invalid
+                numberOfFilms = 0; // Default to 0 films if the file is empty or invalid
                 return; // Exit the method if the file is empty
             } else {
-                numberOfFilms = Integer.parseInt(header); // Insert first line as number of users
+                numberOfFilms = Integer.parseInt(header); // Insert first line as number of films
             }
 
 // Reading the film data from the file, just like for the users.
@@ -171,8 +169,6 @@ public class filmistController {
         } catch (IOException e) {
             System.err.println("Error loading user films: " + e.getMessage());
         }
-
-
     }
 
     private void loadData() {
@@ -186,6 +182,7 @@ public class filmistController {
 
     private void openAddFilmDialog() {
         // Logic to open the Add Film dialog
+        // Add a new film with empty details. Then reads this empty film for the addFilmMenu.fxml. Uses setter methods to set the film details.
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/filmlistia/addfilmMenu.fxml"));
             Parent root = loader.load();
@@ -216,8 +213,19 @@ public class filmistController {
 
     private void writeDataToFile() {
         // Logic to write the data to a file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt"))) {
+                writer.write(String.valueOf(numberOfFilms));
+                writer.newLine(); // Write the number of users as the first line for user identificaiton
+                for (int i =0; i<filmlist.size(); i++) {
+                    writer.write(filmlist.get(i).getFilmTitle() + "," + filmlist.get(i).getFilmDirector() + filmlist.get(i).getFilmGenre() + "," +filmlist.get(i).getFilmYear() + "," + filmlist.get(i).getFilmLength() + "," + filmlist.get(i).getWatchStatus()); // Write each user's details in the format:
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                System.err.println("Error saving films: " + e.getMessage());
+            }
+        }
 
 
     }
-}
+
 
