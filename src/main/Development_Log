@@ -26,6 +26,7 @@ This is a development log for the project. It is used to track changes, features
 7.25.2025
     - Completed main UI layout.
     - Resolved user authentication and file system issues.
+    - Resolved misplaced loggedInUser variable that resulted in null pointer exceptions when accessing user data and causing issues with the main UI.
 
     Next:
         - Note to self: Can use same controller and UI for add and edit film by creating an empty film object and passing it to the controller for edit mode. This then uses the same logic for add.

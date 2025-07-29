@@ -6,8 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.*;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -16,13 +14,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import javafx.scene.control.Alert;
-import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
 
 public class loginController {
 
@@ -66,11 +61,12 @@ public class loginController {
 
         if (user != null && user.getPassword().equals(password)) {
             loginStatus("Login Successful", "Welcome, " + user.getUsername() + "!");
+            System.out.println("Successful login with username: " + user.getUsername() + ". " +  "Sign in permitted. Logged in user set to: " + "\"" + user.getUsername() + "\"" + " with userID: " + user.getUserID());
             // Display a success message if the login is successful
-
+            loggedInUser = user.getUsername();
             openMainMenu(); // Opens the main menu after successful login
             Stage loginStage = (Stage) btn_login.getScene().getWindow();
-            loggedInUser = user.getUsername();
+
             loginStage.close();
         } else {
             loginStatus("Login Failed", "Invalid username or password! Please try again.");
@@ -104,7 +100,7 @@ public class loginController {
 
             try {
                 Files.createDirectories(userDir);
-                System.out.println("User directory created: " + userDir.toAbsolutePath());
+                System.out.println("New user registered. User directory created: " + userDir.toAbsolutePath());
             } catch (IOException e) {
                 System.out.println("Unable to create user directory");
             }

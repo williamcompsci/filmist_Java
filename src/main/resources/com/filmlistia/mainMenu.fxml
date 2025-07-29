@@ -55,7 +55,7 @@
             <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem fx:id="menu_saveList" mnemonicParsing="false" text="Save" />
+            <MenuItem fx:id="menu_saveList" mnemonicParsing="false" onAction="#saveMovieList" text="Save" />
             <MenuItem fx:id="menu_saveListAs" mnemonicParsing="false" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Preferences…" />
@@ -88,7 +88,7 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <Text fx:id="txt_welcome" layoutX="63.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Flimist!" />
-            <Button fx:id="btn_addFilm" layoutX="63.0" layoutY="320.0" mnemonicParsing="false" onAction="#addFilm" prefHeight="25.0" prefWidth="105.0" text="Add a Film" />
+            <Button fx:id="btn_addFilm" layoutX="63.0" layoutY="320.0" mnemonicParsing="false" onAction="#addFilm" prefHeight="25.0" prefWidth="81.0" text="Add a Film" />
             <TableView fx:id="displayTable" layoutX="63.0" layoutY="76.0" prefHeight="224.0" prefWidth="515.0">
               <columns>
                 <TableColumn fx:id="table_filmTitle" prefWidth="113.0" text="Title" />
@@ -100,10 +100,12 @@
               </columns>
             </TableView>
             <TextField fx:id="input_searchBar" layoutX="377.0" layoutY="37.0" prefHeight="25.0" prefWidth="132.0" promptText="Search" />
-            <Button fx:id="btn_editFilm" layoutX="191.0" layoutY="320.0" mnemonicParsing="false" onAction="#editFilm" prefHeight="25.0" prefWidth="105.0" text="Edit Film" />
-            <Button fx:id="btn_markWatched" layoutX="321.0" layoutY="320.0" mnemonicParsing="false" onAction="#markwatched" prefHeight="25.0" prefWidth="122.0" text="Mark as Watched" />
-            <Button fx:id="btn_logout" layoutX="513.0" layoutY="320.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="65.0" text="Logout" textFill="RED" />
+            <Button fx:id="btn_editFilm" layoutX="151.0" layoutY="320.0" mnemonicParsing="false" onAction="#editFilm" prefHeight="25.0" prefWidth="81.0" text="Edit Film" />
+            <Button fx:id="btn_markWatched" layoutX="241.0" layoutY="320.0" mnemonicParsing="false" onAction="#markwatched" prefHeight="25.0" prefWidth="113.0" text="Mark as Watched" />
+            <Button fx:id="btn_logout" layoutX="71.0" layoutY="12.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="65.0" text="Logout" textFill="RED" />
             <Button fx:id="btn_search" layoutX="521.0" layoutY="37.0" mnemonicParsing="false" onAction="#btn_startsearch" prefHeight="25.0" prefWidth="57.0" text="Search" />
+            <Button fx:id="btn_refreshtable" layoutX="362.0" layoutY="320.0" mnemonicParsing="false" onAction="#refreshMovieList" prefHeight="25.0" prefWidth="81.0" text="Refresh List" />
+            <Button fx:id="btn_save" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#saveMovieList" prefHeight="25.0" prefWidth="47.0" text="Save" />
       </children>
     </AnchorPane>
   </children>
