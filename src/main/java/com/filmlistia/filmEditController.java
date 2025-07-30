@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+import static com.filmlistia.filmistController.filmlist;
+
 public class filmEditController {
 
     @FXML
@@ -58,10 +60,13 @@ public class filmEditController {
             alert("Error", "Please fill in all fields.");
             return;
         } else {
-            filmistController.filmlist.add(new Film(title, genre, director, year, duration, false));
-            for (int i = 0; i < filmistController.filmlist.size(); i++) {
-                System.out.println("Film " + (i + 1) + ": " + filmistController.filmlist.get(i).getFilmTitle() + ", " + filmistController.filmlist.get(i).getFilmGenre() + ", " + filmistController.filmlist.get(i).getFilmDirector() + ", " + filmistController.filmlist.get(i).getFilmYear() + ", " + filmistController.filmlist.get(i).getFilmLength() + ", " + filmistController.filmlist.get(i).getWatchStatus());
-            }
+            // Set the current selected film with the setter methods
+            filmlist.get(filmistController.selectedFilmIndex).setFilmTitle(title);
+            filmlist.get(filmistController.selectedFilmIndex).setFilmDirector(director);
+            filmlist.get(filmistController.selectedFilmIndex).setFilmGenre(genre);
+            filmlist.get(filmistController.selectedFilmIndex).setFilmYear(year);
+            filmlist.get(filmistController.selectedFilmIndex).setFilmLength(duration);
+            filmlist.get(filmistController.selectedFilmIndex).setWatched(false); // Set watched status to false by default
         }
 
          // Update the table in the filmistController to reflect the new film
@@ -74,22 +79,22 @@ public class filmEditController {
     private void initialize() {
         int currentYear = java.time.Year.now().getValue();
 
+        // Fill the input fields with selected film values
+        input_titleFilm.setText(filmlist.get(filmistController.selectedFilmIndex).getFilmTitle());
+        input_directorFilm.setText(filmlist.get(filmistController.selectedFilmIndex).getFilmDirector());
+        input_genreFilm.setText(filmlist.get(filmistController.selectedFilmIndex).getFilmGenre());
+        input_yearFilm.setValue(filmlist.get(filmistController.selectedFilmIndex).getFilmYear());
+        input_durationFilm.setValue(filmlist.get(filmistController.selectedFilmIndex).getFilmLength());
+
         // Fill with years from current year down to 1888 since that's the year the first film was made
         for (int i = currentYear; i > 1888; i--) {
             input_yearFilm.getItems().add(i);
         }
 
-        // Set default selection to current year
-        input_yearFilm.setValue(currentYear);
-
-
         // Fill with durations from 300 down to 0
         for (int i = 300; i >= 0; i--) {
             input_durationFilm.getItems().add(i);
         }
-
-        // Set default selection to 300 since that's a duration most films wouldn't exceed
-        input_durationFilm.setValue(300);
     }
 
     private void alert(String title, String message) {

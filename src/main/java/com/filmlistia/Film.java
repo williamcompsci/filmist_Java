@@ -7,15 +7,17 @@ public class Film {
     private int filmYear;
     private int filmLength;
     private boolean watched;
+    private int filmID;
 
     // Constructor method
-    public Film(String filmTitle, String filmGenre, String filmDirector, int filmYear, int filmLength, boolean watched) {
+    public Film(String filmTitle, String filmGenre, String filmDirector, int filmYear, int filmLength, boolean watched, int filmID) {
         this.filmTitle = filmTitle;
         this.filmGenre = filmGenre;
         this.filmDirector = filmDirector;
         this.filmYear = filmYear;
         this.filmLength = filmLength;
         this.watched = watched;
+        this.filmID = filmID; // Default ID, can be set later
     }
 
     //Getter methods
@@ -43,6 +45,7 @@ public class Film {
     public boolean getWatchStatus() {
         return watched;
     }
+    public int getFilmID() { return filmID;}
 
     //Setter methods
 
@@ -69,5 +72,6 @@ public class Film {
     public void setWatched(boolean watched) {
         this.watched = watched;
     }
+    // No set film ID since it is set during construction and should not change so that you can actually track the film
 
 }
