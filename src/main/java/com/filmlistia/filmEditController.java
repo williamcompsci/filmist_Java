@@ -90,7 +90,6 @@ public class filmEditController {
         for (int i = currentYear; i > 1888; i--) {
             input_yearFilm.getItems().add(i);
         }
-
         // Fill with durations from 300 down to 0
         for (int i = 300; i >= 0; i--) {
             input_durationFilm.getItems().add(i);

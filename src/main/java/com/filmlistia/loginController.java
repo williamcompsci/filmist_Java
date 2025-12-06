@@ -58,7 +58,6 @@ public class loginController {
         //Temp variables to store entered username and password
 
         User user = usernameSearch(username);
-
         if (user != null && user.getPassword().equals(password)) {
             loginStatus("Login Successful", "Welcome, " + user.getUsername() + "!");
             System.out.println("Successful login with username: " + user.getUsername() + ". " +  "Sign in permitted. Logged in user set to: " + "\"" + user.getUsername() + "\"" + " with userID: " + user.getUserID());
@@ -150,7 +149,7 @@ public class loginController {
 
     @FXML
 
-    private void openMainMenu() {
+    private void openMainMenu() { // opening main menu
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/filmlistia/mainMenu.fxml"));
             Parent root = loader.load();
